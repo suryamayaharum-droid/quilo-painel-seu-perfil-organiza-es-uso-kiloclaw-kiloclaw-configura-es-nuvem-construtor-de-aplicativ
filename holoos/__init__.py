@@ -35,32 +35,42 @@ from holoos.kernel import (
     Soul,
     get_soul,
 )
-from holoos.ai import (
-    SuperIntelligence,
-    get_super_intelligence,
-    ModelArchitecture,
-    ModelModality,
-    ModelProvider,
-    InferenceRequest,
-    InferenceResult,
-)
-from holoos.memory import (
-    UnifiedMemory,
-    get_memory,
-    MemoryType,
-    MemoryStatus,
-)
-from holoos.planning import (
-    Planner,
-    get_planner,
-    GoalStatus,
-    ReasoningStrategy,
-)
 from holoos.communication import (
     CommunicationHub,
     get_communication_hub,
     Protocol,
     MessageType,
+)
+from holoos.tools import (
+    ToolExecutor,
+    get_tool_executor,
+    ToolCategory,
+)
+from holoos.gateway import (
+    APIGateway,
+    get_gateway,
+    AuthType,
+    RateLimitRule,
+)
+from holoos.database import (
+    DatabaseManager,
+    get_database,
+    KeyValueStore,
+)
+from holoos.monitoring import (
+    MonitoringSystem,
+    get_monitoring,
+    MetricsCollector,
+)
+from holoos.plugins import (
+    PluginManager,
+    get_plugin_manager,
+    PluginState,
+)
+from holoos.config import (
+    ConfigManager,
+    get_config,
+    ConfigSource,
 )
 from holoos.security import (
     SecurityKernel,
@@ -71,7 +81,7 @@ from holoos.security import (
 from holoos.generator import AutonomousCodeGenerator, get_code_generator
 from holoos.governance import MetaGovernanceAssembly, get_assembly
 
-__version__ = "0.6.0"
+__version__ = "0.7.0"
 
 __all__ = [
     # Core types
@@ -139,6 +149,37 @@ __all__ = [
     "get_communication_hub",
     "Protocol",
     "MessageType",
+    
+    # Tools
+    "ToolExecutor",
+    "get_tool_executor",
+    "ToolCategory",
+    
+    # Gateway
+    "APIGateway",
+    "get_gateway",
+    "AuthType",
+    "RateLimitRule",
+    
+    # Database
+    "DatabaseManager",
+    "get_database",
+    "KeyValueStore",
+    
+    # Monitoring
+    "MonitoringSystem",
+    "get_monitoring",
+    "MetricsCollector",
+    
+    # Plugins
+    "PluginManager",
+    "get_plugin_manager",
+    "PluginState",
+    
+    # Config
+    "ConfigManager",
+    "get_config",
+    "ConfigSource",
     
     # Generator
     "AutonomousCodeGenerator",
