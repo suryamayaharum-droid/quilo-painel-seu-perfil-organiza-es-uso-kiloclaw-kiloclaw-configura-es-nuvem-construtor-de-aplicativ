@@ -39,9 +39,9 @@ class MemoryItem:
     id: str
     content: Any
     memory_type: MemoryType
+    timestamp: float = 0.0
     embedding: list[float] = field(default_factory=list)
     importance: float = 0.5
-    timestamp: float
     access_count: int = 0
     last_access: float = 0.0
     tags: list[str] = field(default_factory=list)
@@ -67,11 +67,11 @@ class VectorStore:
         self._metadata: dict[str, dict] = {}
         logger.info(f"[VectorStore] Initialized with {dimensions} dimensions")
 
-    def add_vector(self, id: str, vector: list[float], metadata: dict = None) -> None:
+    def add_vector(self, id: str, vector: list[float], metadata: Optional[dict] = None) -> None:
         if len(vector) != self.dimensions:
             vector = self._pad_vector(vector)
         self._vectors[id] = vector
-        self._metadata[id] = metadata or {}
+        self._metadata[id] = metadata if metadata is not None else {}
 
     def _pad_vector(self, vector: list[float]) -> list[float]:
         if len(vector) > self.dimensions:
@@ -121,10 +121,12 @@ class SemanticMemory:
         self._memories: dict[str, MemoryItem] = {}
         logger.info("[SemanticMemory] Initialized")
 
-    def store(self, content: Any, tags: list[str] = None, importance: float = 0.5) -> str:
+    def store(self, content: Any, tags: Optional[list[str]] = None, importance: float = 0.5) -> str:
         memory_id = hashlib.sha256(str(content).encode()).hexdigest()[:16]
         
         embedding = self._generate_embedding(content)
+        
+        tag_list = tags if tags is not None else []
         
         memory = MemoryItem(
             id=memory_id,
@@ -133,7 +135,7 @@ class SemanticMemory:
             embedding=embedding,
             importance=importance,
             timestamp=time.time(),
-            tags=tags or [],
+            tags=tag_list,
         )
         
         self._memories[memory_id] = memory
@@ -310,16 +312,17 @@ class UnifiedMemory:
         self,
         content: Any,
         memory_type: MemoryType = MemoryType.SEMANTIC,
-        tags: list[str] = None,
+        tags: Optional[list[str]] = None,
         importance: float = 0.5,
-        context: dict = None,
+        context: Optional[dict] = None,
     ) -> str:
         if memory_type == MemoryType.SEMANTIC:
             return self.semantic.store(content, tags, importance)
         elif memory_type == MemoryType.EPISODIC:
+            ctx = context if context is not None else {}
             return self.episodic.store_episode(
                 str(content),
-                context or {},
+                ctx,
                 importance=importance,
             )
         elif memory_type == MemoryType.WORKING:
@@ -331,7 +334,7 @@ class UnifiedMemory:
         
         return self.semantic.store(content, tags, importance)
 
-    def retrieve(self, query: str, memory_type: MemoryType = None, top_k: int = 5) -> list[MemoryItem]:
+    def retrieve(self, query: str, memory_type: Optional[MemoryType] = None, top_k: int = 5) -> list[MemoryItem]:
         if memory_type == MemoryType.SEMANTIC:
             return self.semantic.retrieve(query, top_k)
         elif memory_type == MemoryType.EPISODIC:

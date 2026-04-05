@@ -59,7 +59,7 @@ class ModelSpec:
     architecture: ModelArchitecture
     modality: ModelModality
     provider: ModelProvider
-    parameters: int
+    parameters: Optional[int]
     context_length: int
     capabilities: list[str]
     quantization_support: list[str]
@@ -501,7 +501,8 @@ class SuperIntelligence:
         )
         
         if not model_id:
-            model_id = self.orchestrator.select_model_for_task("", modality)
+            selected = self.orchestrator.select_model_for_task("", modality)
+            model_id = selected if selected else "gpt-3.5-turbo"
         
         request = InferenceRequest(
             model_id=model_id,
@@ -521,7 +522,7 @@ class SuperIntelligence:
             model_preference=model,
             **kwargs,
         )
-        return result.output if result.success else result.error
+        return str(result.output) if result.success else (result.error or "Unknown error")
 
     def generate_image(self, prompt: str, model: Optional[str] = None) -> dict:
         result = self.process(
