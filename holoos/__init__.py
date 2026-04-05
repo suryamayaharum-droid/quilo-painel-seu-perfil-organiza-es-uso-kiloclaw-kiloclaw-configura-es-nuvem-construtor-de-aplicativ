@@ -35,6 +35,15 @@ from holoos.kernel import (
     Soul,
     get_soul,
 )
+from holoos.ai import (
+    SuperIntelligence,
+    get_super_intelligence,
+    ModelArchitecture,
+    ModelModality,
+    ModelProvider,
+    InferenceRequest,
+    InferenceResult,
+)
 from holoos.security import (
     SecurityKernel,
     get_security_kernel,
@@ -44,7 +53,7 @@ from holoos.security import (
 from holoos.generator import AutonomousCodeGenerator, get_code_generator
 from holoos.governance import MetaGovernanceAssembly, get_assembly
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 __all__ = [
     # Core types
@@ -85,6 +94,15 @@ __all__ = [
     "get_advanced_attention",
     "Soul",
     "get_soul",
+    
+    # AI Hub
+    "SuperIntelligence",
+    "get_super_intelligence",
+    "ModelArchitecture",
+    "ModelModality",
+    "ModelProvider",
+    "InferenceRequest",
+    "InferenceResult",
     
     # Generator
     "AutonomousCodeGenerator",
