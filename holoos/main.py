@@ -36,6 +36,8 @@ def main():
             get_security_kernel,
             get_soul,
             get_assembly,
+            get_consciousness,
+            get_code_generator,
         )
         
         logger.info("Initializing modules...")
@@ -84,6 +86,12 @@ def main():
         
         assembly = get_assembly()
         logger.info("✓ Governance Assembly")
+        
+        consciousness = get_consciousness()
+        logger.info("✓ Consciousness Architecture")
+        
+        codegen = get_code_generator()
+        logger.info("✓ Autonomous Code Generator")
         
         logger.info("=" * 60)
         logger.info("HoloOS v0.7.0 - All Systems Online!")

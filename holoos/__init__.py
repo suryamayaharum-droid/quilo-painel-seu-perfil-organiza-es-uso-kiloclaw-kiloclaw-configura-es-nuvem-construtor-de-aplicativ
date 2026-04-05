@@ -80,6 +80,9 @@ from holoos.security import (
 )
 from holoos.generator import AutonomousCodeGenerator, get_code_generator
 from holoos.governance import MetaGovernanceAssembly, get_assembly
+from holoos.ai import get_super_intelligence
+from holoos.memory import get_memory
+from holoos.planning import get_planner
 
 __version__ = "0.7.0"
 
