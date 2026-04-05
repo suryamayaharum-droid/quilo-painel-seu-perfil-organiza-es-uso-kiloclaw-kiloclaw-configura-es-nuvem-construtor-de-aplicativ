@@ -44,6 +44,24 @@ from holoos.ai import (
     InferenceRequest,
     InferenceResult,
 )
+from holoos.memory import (
+    UnifiedMemory,
+    get_memory,
+    MemoryType,
+    MemoryStatus,
+)
+from holoos.planning import (
+    Planner,
+    get_planner,
+    GoalStatus,
+    ReasoningStrategy,
+)
+from holoos.communication import (
+    CommunicationHub,
+    get_communication_hub,
+    Protocol,
+    MessageType,
+)
 from holoos.security import (
     SecurityKernel,
     get_security_kernel,
@@ -53,7 +71,7 @@ from holoos.security import (
 from holoos.generator import AutonomousCodeGenerator, get_code_generator
 from holoos.governance import MetaGovernanceAssembly, get_assembly
 
-__version__ = "0.5.0"
+__version__ = "0.6.0"
 
 __all__ = [
     # Core types
@@ -103,6 +121,24 @@ __all__ = [
     "ModelProvider",
     "InferenceRequest",
     "InferenceResult",
+    
+    # Memory
+    "UnifiedMemory",
+    "get_memory",
+    "MemoryType",
+    "MemoryStatus",
+    
+    # Planning
+    "Planner",
+    "get_planner",
+    "GoalStatus",
+    "ReasoningStrategy",
+    
+    # Communication
+    "CommunicationHub",
+    "get_communication_hub",
+    "Protocol",
+    "MessageType",
     
     # Generator
     "AutonomousCodeGenerator",
