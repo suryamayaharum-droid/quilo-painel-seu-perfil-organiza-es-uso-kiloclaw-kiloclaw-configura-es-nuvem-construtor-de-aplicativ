@@ -30,10 +30,15 @@ from holoos.kernel import (
     get_self_kernel,
     ConsciousnessArchitecture,
     get_consciousness,
+    AdvancedSelfAttention,
+    get_advanced_attention,
+    Soul,
+    get_soul,
 )
 from holoos.generator import AutonomousCodeGenerator, get_code_generator
+from holoos.governance import MetaGovernanceAssembly, get_assembly
 
-__version__ = "0.2.0"
+__version__ = "0.3.0"
 
 __all__ = [
     # Core types
@@ -70,8 +75,16 @@ __all__ = [
     "get_self_kernel",
     "ConsciousnessArchitecture",
     "get_consciousness",
+    "AdvancedSelfAttention",
+    "get_advanced_attention",
+    "Soul",
+    "get_soul",
     
     # Generator
     "AutonomousCodeGenerator",
     "get_code_generator",
+    
+    # Governance
+    "MetaGovernanceAssembly",
+    "get_assembly",
 ]

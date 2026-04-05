@@ -47,14 +47,15 @@ class GlobalWorkspace:
         self._broadcast_history: list[WorkspaceContent] = []
         logger.info(f"[GlobalWorkspace] Initialized with capacity {capacity}")
 
-    def add(self, content: Any, source: str, salience: float, tags: list[str] = None) -> None:
+    def add(self, content: Any, source: str, salience: float, tags: Optional[list[str]] = None) -> None:
         from time import time
+        tag_list = tags if tags is not None else []
         wc = WorkspaceContent(
             content=content,
             source_module=source,
             salience=salience,
             timestamp=time(),
-            tags=tags or [],
+            tags=tag_list,
         )
         self._contents.append(wc)
         logger.debug(f"[GlobalWorkspace] Added content from {source}, salience: {salience:.2f}")
