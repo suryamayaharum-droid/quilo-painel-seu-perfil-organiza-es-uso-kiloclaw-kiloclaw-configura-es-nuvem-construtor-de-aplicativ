@@ -113,18 +113,19 @@ class Soul:
         self._experiences.append(exp)
         logger.debug(f"[Soul] Experience added: {event_type}")
 
-    def update_belief(self, belief_id: str, statement: str, confidence: float, evidence: list[str] = None) -> None:
+    def update_belief(self, belief_id: str, statement: str, confidence: float, evidence: Optional[list[str]] = None) -> None:
         if belief_id in self._beliefs:
             self._beliefs[belief_id].statement = statement
             self._beliefs[belief_id].confidence = confidence
             if evidence:
                 self._beliefs[belief_id].evidence.extend(evidence)
         else:
+            evidence_list = evidence if evidence is not None else []
             self._beliefs[belief_id] = Belief(
                 id=belief_id,
                 statement=statement,
                 confidence=confidence,
-                evidence=evidence or [],
+                evidence=evidence_list,
             )
 
     def add_goal(self, goal: dict[str, Any]) -> None:
@@ -172,7 +173,7 @@ class Soul:
                 ],
             },
             "beliefs": {
-                count: len(self._beliefs),
+                "total": len(self._beliefs),
                 "core": [
                     {"id": b.id, "confidence": b.confidence}
                     for b in list(self._beliefs.values())[:5]

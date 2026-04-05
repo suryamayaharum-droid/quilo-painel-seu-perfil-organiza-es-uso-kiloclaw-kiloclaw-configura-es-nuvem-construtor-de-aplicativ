@@ -35,10 +35,16 @@ from holoos.kernel import (
     Soul,
     get_soul,
 )
+from holoos.security import (
+    SecurityKernel,
+    get_security_kernel,
+    ThreatLevel,
+    ThreatCategory,
+)
 from holoos.generator import AutonomousCodeGenerator, get_code_generator
 from holoos.governance import MetaGovernanceAssembly, get_assembly
 
-__version__ = "0.3.0"
+__version__ = "0.4.0"
 
 __all__ = [
     # Core types
@@ -87,4 +93,10 @@ __all__ = [
     # Governance
     "MetaGovernanceAssembly",
     "get_assembly",
+    
+    # Security
+    "SecurityKernel",
+    "get_security_kernel",
+    "ThreatLevel",
+    "ThreatCategory",
 ]
